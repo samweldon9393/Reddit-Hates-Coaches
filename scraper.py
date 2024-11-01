@@ -13,6 +13,12 @@ NBA_sub = reddit.subreddit('NBA')
 #create an object for a specific post
 submission = reddit.submission("1cyirss")
 
+"""
+
+
+
+"""
+
 submission.comments.replace_more()
 with open('output_comments_2.txt', 'w', encoding='utf-8') as file:
     for top_level_comment in submission.comments:

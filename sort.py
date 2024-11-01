@@ -1,20 +1,19 @@
 from collections import defaultdict
 
-coaches = {"Quin Snyder", "Joe Mazzulla", "Doc Rivers", "Adrian Griffin",
-           "Jacque Vaughn", "Steve Clifford", "Billy Donovan", "J.B.
-           Bickerstaff", "Jason Kidd", "Michael Malone", "Monty Williams",
-           "Chris Finch", "Steve Kerr", "Ime Udoka", "Rick Carlisle", "Tyronn
-           Lue", "Darvin Ham", "Taylor Jenkins", "Erik Spoelstra", "Willie
-           Green", "Tom Thibodeau", "Mark Daigneault", "Jamahl Mosley",
-           "Nick Nurse", "Mike Budenholzer", "Chauncey Billups", "Mike Brown",
-           "Gregg Popovich", "Darko Rajakovic", "Will Hardy", "Wes Unseld Jr.",
-           "Micah Nori"}
+#default dict of coach names and strings to catch them
+from names_lists import names_dict
 
-comments_dict = defaultdict(set)
+names_rev = {}
+for name, nickname in names_dict.items():
+    for nickname in nickname:
+        names_rev[nickname] = name
 
-for coach in coaches:
-    comments_dict[coach] = set()
-
-with open('output_comments.txt', 'r', ecoding='utf-8') as file:
-    for line_number, comment in enumerate(file, start=1):
-        if comment 
+with open('output_files/output_comments.txt', 'r', encoding='utf-8') as in_file, \
+     open('output_files/found_names.txt', 'w', encoding='utf-8') as out_file:
+    #TODO this is an issue cause its treating each line as a new comment
+    for line in in_file:
+        for name, nicknames in names_dict.items():
+            for nickname in nicknames:
+                if nickname in line:
+                    out_file.write(f"{name}: {line}")
+                    break
