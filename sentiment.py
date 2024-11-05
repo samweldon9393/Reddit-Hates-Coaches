@@ -20,4 +20,5 @@ with open('output_files/found_names.txt', 'r', encoding='utf-8') as file:
                 elif sentiment['compound'] <= -0.05:
                     senti[coach][1] += 1
 
-print(senti)
+for key, value in senti.items():
+    print(f"{key}: {value}")
