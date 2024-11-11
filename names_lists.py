@@ -1,16 +1,17 @@
 from collections import defaultdict
 
+#dictionary for assigning comments to coaches
 names_dict = {
     "Quin Snyder": ["quin", "snyder"],
     "Joe Mazzulla": ["mazzulla", "mazula", "mazulla", " maz ", " mazz "],
     "Doc Rivers": ["rivers", " doc "],
-    "Adrian Griffin": ["adrian", "griffin"],
-    "Erik Spoelstra": ["erik", "spoelstra", " spo "],
+    "Adrian Griffin": ["griffin"],
+    "Erik Spoelstra": ["spoelstra", " spo "],
     "Jacque Vaughn": ["jacque", "jaque", "vaughn", "vaugn"],
     "Steve Clifford": ["clifford"],
     "Billy Donovan": ["billy donovan", "billy"],
-    "J.B. Bickerstaff": ["bickerstaff", "j.b"],
-    "Jason Kidd": [" kidd ", "j kid", "jason"],
+    "J.B. Bickerstaff": ["bickerstaff"],
+    "Jason Kidd": [" kidd ", "j kid", "jason kid"],
     "Michael Malone": ["malone"],
     "Monty Williams": ["monty"],
     "Chris Finch": ["finch"],
@@ -27,11 +28,18 @@ names_dict = {
     "Nick Nurse": ["nurse"],
     "Mike Budenholzer": ["budenholzer", " bud ", "budenholzer"],
     "Mike Brown": ["mike brown", "coach brown", "coach mike"],
-    "Gregg Popovich": [" pop ", "popovich"],
+    "Gregg Popovich": ["popovich"],
     "Darko Rajakovic": ["darko", "rajakovic"],
-    "Will Hardy": ["hardy"],
-    "Wes Unseld Jr": [" wes ", "unseld"]
-}
+    "Will Hardy": ["will hardy"],
+    "Wes Unseld Jr": [" wes ", "unseld"],
+    "Jordi Fernández": ["jordi", "fernandez", "fernández"],
+    "Charles Lee": ["charles lee"],
+    "Kenny Atkinson": ["atkinson"],
+    "JJ Redick": [" jj ", " j.j. ", " j.j ", "redick"],
+    "Chauncey Billups": ["chauncey", "chauncy", "billups", "bilups"],
+    "Brian Keefe": ["keefe", " keef "] }
+
+#array of all coaches in the database
 coaches = {"Quin Snyder", "Joe Mazzulla", "Doc Rivers", "Adrian Griffin",
            "Jacque Vaughn", "Steve Clifford", "Billy Donovan",
            "J.B. Bickerstaff", "Jason Kidd", "Michael Malone", "Monty Williams",
@@ -39,18 +47,23 @@ coaches = {"Quin Snyder", "Joe Mazzulla", "Doc Rivers", "Adrian Griffin",
            "Tyronn Lue", "Darvin Ham", "Taylor Jenkins", "Erik Spoelstra",
            "Willie Green", "Tom Thibodeau", "Mark Daigneault", "Jamahl Mosley",
            "Nick Nurse", "Mike Budenholzer", "Chauncey Billups", "Mike Brown",
-           "Gregg Popovich", "Darko Rajakovic", "Will Hardy", "Wes Unseld Jr."}
+           "Gregg Popovich", "Darko Rajakovic", "Will Hardy", "Wes Unseld Jr.",
+           "Jordi Fernánez", "Charles Lee", "Kenny Atkinson", "Cauncey Billups",
+           "Brian Keefe" }
 
+#array of substrings used to capture comments
+#features nicknames and common misspellings
 catch_coaches = {"quin", "snyder", "mazzulla", "mazula", "mazzula", "mazulla",
-           " maz ", " mazz ", " doc ", "adrian", "griffin", " erik ",
+           " maz ", " mazz ", " doc ", "griffin", " erik ",
            "jacque", "vaughn", "vaugn", "clifford", "donovan",
-           "j.b", "bickerstaff", " kidd ", "malone", "monty", "williams",
+           "bickerstaff", " kidd ", "malone", "monty", "williams",
            "finch", "kerr", " ime ", "udoka", "carlisle", "tyronn", "lue",
            "darvin", " ham ", "taylor", "jenkins", " spo ", "spoelstra",
            "rivers", "willie green", "thibodeau", "thibbs", "tibbs", " tibs ",
            "daigneault", "dagneault", "dagnault", "jamahl", "mosley",
            "nurse", "budenholzer", " bud ", "chauncey", "billups", "mike brown",
-           "coach brown", "coach mike", "gregg", "popovich", " pop ", "darko",
-           "rajakovic", "hardy", "wes", "unseld"}
-
-
+           "coach brown", "coach mike", "gregg", "popovich", "darko",
+           "rajakovic", "will hardy", "wes", "unseld", "jordi", "fernández",
+           "fernandez", "charles lee", "atkinson", " jj ", " j.j. ", " j.j ",
+           "redick", "chauncey", "chauncy", "billups", "bilups", "keefe",
+           " keef "}
