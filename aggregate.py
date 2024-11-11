@@ -21,13 +21,13 @@ for name, pos, neg, total in results:
     mood = 'Neutral'
     if neg > pos:
         mood = 'Negative'
-        if pos is 0:
+        if pos == 0:
             ratio = 100
         else:
             ratio = neg/pos * -1
     elif pos > neg:
         mood = 'Positive'
-        if neg is 0:
+        if neg == 0:
             ratio = 100
         else:
             ratio = pos/neg * 1
