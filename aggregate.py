@@ -1,7 +1,12 @@
 import sqlite3
 
-conn = sqlite3.connect('comments.db')
-cursor = conn.cursor()
+#Open the comments db
+conn_src = sqlite3.connect('comments.db')
+cursor_src = conn_src.cursor()
+
+# Connect to or create the aggregated database
+conn_dest = sqlite3.connect('coaches.db')
+cursor_dest = conn_dest.cursor()
 
 query = '''
     SELECT coach,
@@ -12,10 +17,19 @@ query = '''
     GROUP BY coach
     ORDER BY coach
 '''
-
-cursor.execute(query)
-
-results = cursor.fetchall()
+# Create the results table if it doesn't already exist
+cursor_dest.execute('''
+CREATE TABLE IF NOT EXISTS aggregated (
+    coach TEXT,
+    mood TEXT,
+    ratio REAL,
+    positive_count INTEGER,
+    negative_count INTEGER
+)
+''')
+conn_dest.commit()
+cursor_src.execute(query)
+results = cursor_src.fetchall()
 
 for name, pos, neg, total in results:
     mood = 'Neutral'
@@ -32,12 +46,20 @@ for name, pos, neg, total in results:
         else:
             ratio = pos/neg * 1
 
-    normalized_ratio = ratio / total
+    # Insert the results into the destination database
+    cursor_dest.execute('''
+        INSERT INTO aggregated (coach, mood, ratio, positive_count, negative_count)
+        VALUES (?, ?, ?, ?, ?)
+    ''', (name, mood, ratio, pos, neg))
 
-    print(f"{name}: {mood}")
-    print(f" Ratio: {ratio:.2f}")
-    print(f" Positive count: {pos}")
-    print(f" Negative count: {neg}")
+    #normalized_ratio = ratio / total
+
+    #print(f"{name}: {mood}")
+    #print(f" Ratio: {ratio:.2f}")
+    #print(f" Positive count: {pos}")
+    #print(f" Negative count: {neg}")
     #print(f" Normalized ratio: {normalized_ratio}")
 
-conn.close()
+conn_dest.commit()
+conn_src.close()
+conn_src.close()
