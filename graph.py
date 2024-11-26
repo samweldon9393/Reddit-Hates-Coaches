@@ -9,7 +9,7 @@ query = "SELECT coach, ratio FROM aggregated GROUP BY coach"
 df = pd.read_sql_query(query, conn)
 
 conn.close()
-'''
+
 left_group = ["Quin Snyder", "Erik Spoelstra", "Steve Clifford",
               "Billy Donovan", "Michael Malone", "Chris Finch", "Steve Kerr", 
               "Rick Carlisle", "Taylor Jenkins", "Tom Thibodeau",
@@ -20,7 +20,7 @@ right_group = ["Joe Mazzulla", "Doc Rivers", "Adrian Griffin", "Jacque Vaughn",
                "J.B. Bickerstaff", "Jason Kidd", "Monty Williams", "Ime Udoka",
                "Tyronn Lue", "Darvin Ham", "Willie Green", "Jamahl Mosley",
                "Mike Brown", "Wes Unseld Jr", "Charles Lee","Chauncey Billups"]
-'''
+
 age_order = ["Joe Mazzulla", "Will Hardy", "Mark Daigneault",
              "Charles Lee", "JJ Redick", "Taylor Jenkins", "Jordi Fernández",
              "Willie Green", "J.B. Bickerstaff", "Darko Rajakovic",

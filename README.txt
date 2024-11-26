@@ -6,9 +6,61 @@ This is a collection of python scripts to scrape comments from r/NBA and the
 various NBA team subreddits, and then sort and analyze them.
 -------------------------------------------------------------------------------
 
+--------------------
+METHODOLOGY WRITE UP
+--------------------
+
+Put simply, I wrote a collection of computer programs that scraped around 7,750
+Reddit threads and collected just south of 100,000 comments that each featured
+the name of at least one NBA head coach. Each comment was sorted and stored in
+a database. I then used a machine learning algorithm to grade each comment with
+a score of either “positive” or “negative.” Next, I aggregated those data, made
+a few graphs, and looked for trends. I chose to use Reddit comments instead of
+some other social media for two reasons: First, Reddit comments are very easy
+to scrape. I would love to repeat this experiment with Instagram or Twitter/X
+content, but collecting that data would simply be more difficult. The other
+reason is that Reddit users are very likely to be young white men who identify
+as liberal (Pew). Given that a subset of the white male population who
+self-identify as liberal are likely to profess anti-racist views, this data set
+may be particularly revealing of the effects of unconscious bias.
+
+This project is fully open source, and all of my code can be found on GitHub.
+Python was the most natural language for this project, and since I am not
+particularly fluent in it I relied on ChatGPT for help with syntax and
+suggestions for available libraries (OpenAI). To collect the data, I used the
+PRAW Python library which works with Reddit API to allow all sorts of
+functionality, including comment scraping (PRAW). The data set was all of the
+posts titled  “Game Thread” or “Post Game Thread” from each NBA team’s
+subreddit as well as the main NBA subreddit (the automated search was able to
+scrape around 250 threads from each sub) (Reddit). The comments were sorted by
+coach and entered into an SQLite database (sqlite). I then used the pre-trained
+natural language processing model from Hugging Face's Transformers library to
+perform sentiment analysis on each comment (Hugging Face). Finally, I used the
+Pandas, Matplotlib, and Seaborn libraries to create graphs from the data
+(included below).
+
+Being constrained by time, my relatively novice Python skills,
+and most of all the technical hurdles of working on my little Acer laptop,
+the data collection and analysis methods had several severe limitations and
+shortcomings. For instance, the data sets for some coaches are much larger than
+others, resulting partially from coaches' names. Gregg Popovich is frequently
+called “Pop,” but attempting to collect those comments would have meant
+attributing to him every comment about how some player is “about to pop off,”
+etc. There were a few such examples. Furthermore, a comment like “I hate Jason
+Kidd, he’s a horrible idiot, glad we have Mike Brown,” would be considered
+negative, and attributed to both Kidd and Brown, even though it is in fact
+positive about Brown. I won’t spend any more time here discussing these
+shortcomings, except to say that the saving grace is that most of the data
+collection issues are equally true for all of the coaches in the study, and
+the sample size should be large enough that the effects of this noise are
+minimized.
+
+
 -------
 RESULTS
 -------
+
+b_pos = 13494 b_neg = 41484 w_pos = 10934 w_neg = 27744
 
 The actual SQL databases are on GitHub so anyone can verify the numbers without
 having to run all of these scripts again. Overall, the findings are interesting
@@ -66,22 +118,54 @@ Here's what I found:
     Lee, who racked up a negative ratio in the same amount of games. Adrian
     Griffin only coached half a season in this sample and his ratio was firmly
     negative at 3/1.
+- Statistical Significance
+  - This data set illustrates that Group B had a ratio of negative-to-positive
+    comments around 25% higher than that ratio for Group A. However, BOTH groups
+    recieved overwhelmingly more negative comments than positive, with 75% of
+    Group B's overall comments being negative, and 72% for Group A. That is a
+    difference of around 3.2%, but thanks to the large sample size, we can say
+    with extreme confidence that both the difference in the ratios and the
+    difference in the proportions of comments are statistically significant
+  - Here's the results of calculating a Z Test for significance (ztest.py):
+      -Proportion for Group B: 0.755
+      -Proportion for Group W: 0.729
+      -Pooled Proportion: 0.744
+      -Standard Error: 0.002910
+      -Z-Score: 8.917
 
-  Who went in which
+
+- Who went in which
   category was based on general perception, as this study is concerned with
   commenters' bias, so their perception is ultimately what mattered. The data
   is available if anyone wants to see how things shake out with differently
   constructed categories.
 
+-------------------------------------------------------------------------------
 
------
-TODO:
------
-  Need to go through and refilter a few of the coaches
-    Jacque Vaughn caught Jamie Jacquez comments
-     - DONE
-    Adrian Griffin caught Blake Griffin comments
-     - DONE
-    Mike Malone caught Karl Malone
-     - DONE
+-----------------------------
+Description of program parts:
+-----------------------------
 
+- aggregate.py - Used to aggregate the data from the SQLite database into
+  analyzable form
+
+- cleanup.py - Used to remove junk comments (such as comments about Blake
+  Griffin that made it into Adrian Griffin's pool)
+
+- find_submission.py - Used to generate lists of Submission IDs for posts on
+  all of the NBA subreddits
+
+- graph.py - Used to create graphs from the data
+
+- names_lists.py - Used to collect data structures with coach names and comment
+  catching substrings for nicknames and common misspellings
+
+- scraper.py - Used to do the work of scraping the Reddit threads and sorting
+  the found comments into the SQLite database
+
+- sentiment.py - Used for performing the sentiment analysis
+
+- sort.py - Used early in the project for testing sorting, this functionality
+  wound up being included in scraper.py
+
+- sql_print.py - Used to print the SQLite databases to the terminal
