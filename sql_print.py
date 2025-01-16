@@ -35,6 +35,9 @@ b_pos = 0
 b_neg = 0
 
 for row in rows:
+    print(f"{row[0]} {row[1]} {row[2]}")
+
+    '''
     coach = row[0]
     positive_count = row[1]
     negative_count = row[2]
@@ -45,6 +48,7 @@ for row in rows:
     elif coach in right_group:
         b_pos += positive_count
         b_neg += negative_count
+    '''
 
 print(f"b_pos = {b_pos} b_neg = {b_neg} w_pos = {w_pos} w_neg = {w_neg}")
 

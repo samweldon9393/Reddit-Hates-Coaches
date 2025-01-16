@@ -6,6 +6,36 @@ This is a collection of python scripts to scrape comments from r/NBA and the
 various NBA team subreddits, and then sort and analyze them.
 -------------------------------------------------------------------------------
 
+-----------------------------
+Description of program parts:
+-----------------------------
+
+- aggregate.py - Used to aggregate the data from the SQLite database into
+  analyzable form
+
+- cleanup.py - Used to remove junk comments (such as comments about Blake
+  Griffin that made it into Adrian Griffin's pool)
+
+- find_submission.py - Used to generate lists of Submission IDs for posts on
+  all of the NBA subreddits
+
+- graph.py - Used to create graphs from the data
+
+- names_lists.py - Used to collect data structures with coach names and comment
+  catching substrings for nicknames and common misspellings
+
+- scraper.py - Used to do the work of scraping the Reddit threads and sorting
+  the found comments into the SQLite database
+
+- sentiment.py - Used for performing the sentiment analysis
+
+- sort.py - Used early in the project for testing sorting, this functionality
+  wound up being included in scraper.py
+
+- sql_print.py - Used to print the SQLite databases to the terminal
+
+-------------------------------------------------------------------------------
+
 --------------------
 METHODOLOGY WRITE UP
 --------------------
@@ -52,6 +82,7 @@ collection issues are equally true for all of the coaches in the study, and
 the sample size should be large enough that the effects of this noise are
 minimized.
 
+-------------------------------------------------------------------------------
 
 -------
 RESULTS
@@ -131,33 +162,3 @@ Here's what I found:
   commenters' bias, so their perception is ultimately what mattered. The data
   is available if anyone wants to see how things shake out with differently
   constructed categories.
-
--------------------------------------------------------------------------------
-
------------------------------
-Description of program parts:
------------------------------
-
-- aggregate.py - Used to aggregate the data from the SQLite database into
-  analyzable form
-
-- cleanup.py - Used to remove junk comments (such as comments about Blake
-  Griffin that made it into Adrian Griffin's pool)
-
-- find_submission.py - Used to generate lists of Submission IDs for posts on
-  all of the NBA subreddits
-
-- graph.py - Used to create graphs from the data
-
-- names_lists.py - Used to collect data structures with coach names and comment
-  catching substrings for nicknames and common misspellings
-
-- scraper.py - Used to do the work of scraping the Reddit threads and sorting
-  the found comments into the SQLite database
-
-- sentiment.py - Used for performing the sentiment analysis
-
-- sort.py - Used early in the project for testing sorting, this functionality
-  wound up being included in scraper.py
-
-- sql_print.py - Used to print the SQLite databases to the terminal
