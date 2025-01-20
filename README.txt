@@ -24,6 +24,8 @@ Description of program parts:
 - names_lists.py - Used to collect data structures with coach names and comment
   catching substrings for nicknames and common misspellings
 
+- rand.py - Used to sample random comments for verification
+
 - scraper.py - Used to do the work of scraping the Reddit threads and sorting
   the found comments into the SQLite database
 
@@ -31,6 +33,8 @@ Description of program parts:
 
 - sort.py - Used early in the project for testing sorting, this functionality
   wound up being included in scraper.py
+
+- stats.py - Used to check statistics about aggregated db with numpy and pandas
 
 - sql_print.py - Used to print the SQLite databases to the terminal
 
