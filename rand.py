@@ -12,5 +12,11 @@ df = pd.read_sql_query(query, conn)
 comment_counts = df['coach'].value_counts()
 print(comment_counts)
 
-grouped = df.groupby(['coach'])
-print(grouped.sample(1))
+#random sample from each coach
+#grouped = df.groupby(['coach'])
+#print(grouped.sample(1))
+
+#checking what happened with Tibbs
+tibbs = df[df['coach'] == 'Tom Thibodeau']
+print(tibbs.sample(10))
+
