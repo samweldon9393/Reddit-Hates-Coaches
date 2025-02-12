@@ -59,4 +59,7 @@ cursor = conn.cursor()
 query = 'SELECT * FROM coaches'
 df = pd.read_sql_query(query, conn)
 
-print(df['coach'].value_counts(normalize = True))
+coach = df['coach']
+senti = df[['coach', 'sentiment']]
+print(coach[senti['sentiment'] < 0].value_counts(normalize = True))
+print(coach.value_counts(normalize = True))
