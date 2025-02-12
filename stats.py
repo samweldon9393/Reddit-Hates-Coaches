@@ -4,6 +4,9 @@ import sqlite3
 import matplotlib.pyplot as plt
 
 #turn the SQL database into a pandas matrix to perform calculations
+
+'''
+aggregated DB
 conn = sqlite3.connect('coaches.db')
 cursor = conn.cursor()
 query = 'SELECT * FROM aggregated'
@@ -14,14 +17,12 @@ df.columns = ['Coach', 'Sentiment', 'Ratio', 'Positive', 'Negative']
 #find the distance of each ratio from the mean, save that in an array, square
 #sum those and divide by number of data points to get variance
 
-'''
 ratio = np.array(df['Ratio'])
 dists = ratio - np.mean(ratio)
 sq_dists = dists ** 2
 sum_sq_dists = sum(sq_dists)
 variance = sum_sq_dists / len(df)
 print(variance)
-'''
 
 #using built in functions
 variance = np.var(df['Ratio'])
@@ -51,3 +52,11 @@ print('\n\nRatio collumn described: \n' + str(described))
 
 all_described = df.describe()
 print('\n\nWhole thing described: \n' + str(all_described))
+'''
+#comment DB
+conn = sqlite3.connect('comments.db')
+cursor = conn.cursor()
+query = 'SELECT * FROM coaches'
+df = pd.read_sql_query(query, conn)
+
+print(df['coach'].value_counts(normalize = True))
