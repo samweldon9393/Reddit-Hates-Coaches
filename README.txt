@@ -158,6 +158,12 @@ Here's what I found:
     difference of around 3.2%, but thanks to the large sample size, we can say
     with relative confidence that both the difference in the ratios and the
     difference in the proportions of comments are statistically significant
+- Darvin Ham had nearly 20% of all comments, meaning even in other team's 
+    subreddits he was being talked about. The next most commented coach was 
+    Doc Rivers, which again is hardly surprising. The fact that the two 
+    coaches with what I would call the worst reputations are the two most 
+    talked about coaches demonstrates just how much more likely internet 
+    commenters are to talk about coaches negatively than positively.
   
 
 
